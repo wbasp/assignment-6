@@ -1,3 +1,4 @@
+document.getElementById('err-message').style.display = 'none';
 const searchPhone=()=>{
     const inputField = document.getElementById('input-field');
     const inputValue = inputField.value;
@@ -5,11 +6,19 @@ const searchPhone=()=>{
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`;
     fetch(url)
     .then(res=>res.json())
-    .then(data=>displayResult(data.data));
+    .then(data=>{if(data.status==false){
+        searchResult.textContent='';
+        document.getElementById('err-message').style.display = 'block';
+    }
+    else{
+        document.getElementById('err-message').style.display = 'none';
+        displayResult(data.data);
+    }});
+    // }
 }
+const searchResult = document.getElementById('search-result');
 const displayResult = phones =>{
-    const searchResult = document.getElementById('search-result');
-    searchResult.innerHTML=``;
+    searchResult.textContent='';
     phones.forEach(phone => {
         const newDiv = document.createElement('div');
         newDiv.classList.add('col');
