@@ -75,8 +75,8 @@ const displayPhoneDetails = phone =>{
         </div>
     </div>
     `;
-    if(${phone.data.releaseDate}==undefined||${phone.data.releaseDate}==null||${phone.data.releaseDate}==''){
-        document.getElementById('Rdate').innerText='Release date: no release found';
-    }
     phoneDetailsDiv.appendChild(newDiv);
+    if(phone.data.releaseDate==false){
+        document.getElementById('Rdate').innerText='Release date: no release date found';
+    }
 }
