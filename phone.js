@@ -12,6 +12,7 @@ const searchPhone=()=>{
     .then(data=>{if(data.status==false){
         searchResult.textContent='';
         document.getElementById('err-message').style.display = 'block';
+        document.getElementById('ph-details').style.display = 'none';
     }
     else{
         document.getElementById('err-message').style.display = 'none';
@@ -46,23 +47,36 @@ const loadPhoneDetail = phoneId => {
     }
 const displayPhoneDetails = phone =>{
     const phoneDetailsDiv = document.getElementById('ph-details');
+    phoneDetailsDiv.style.display='block';
     phoneDetailsDiv.textContent='';
     const newDiv = document.createElement('div');
+    newDiv.classList.add('card');
     newDiv.innerHTML=`
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="${phone.data.image}" class="w-75 h-75 ms-5 mt-5 rounded-start" alt="picture of a phone of ${phone.data.brand}">
+        </div>
+        <div class="col-md-8 d-flex mt-5">
+            <div class="card-body mx-4">
+                <p class="card-title">Brand: ${phone.data.brand}</p>
+                <p class="card-title">Phone name: ${phone.data.name}</p>
+                <p id="Rdate" class="card-title">Release date: ${phone.data.releaseDate}</p>
+                <p class="card-title">WLAN: ${phone.data.others.WLAN}</p>
+                <p class="card-title">Bluetooth: ${phone.data.others.Bluetooth}</p>
+                <p class="card-title">GPS: ${phone.data.others.GPS}</p>
             </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
+            <div class="card-body mx-4">
+                <h3>Main Features:</h3>
+                <p class="card-title">Storage: ${phone.data.mainFeatures.storage}</p>
+                <p class="card-title">Display size: ${phone.data.mainFeatures.displaySize}</p>
+                <p class="card-title">Chip set: ${phone.data.mainFeatures.chipSet}</p>
+                <p class="card-title">Memory: ${phone.data.mainFeatures.memory}</p>
             </div>
         </div>
     </div>
     `;
+    if(${phone.data.releaseDate}==undefined||${phone.data.releaseDate}==null||${phone.data.releaseDate}==''){
+        document.getElementById('Rdate').innerText='Release date: no release found';
+    }
     phoneDetailsDiv.appendChild(newDiv);
 }
