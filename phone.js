@@ -56,7 +56,7 @@ const displayPhoneDetails = phone =>{
         <div class="col-md-4">
             <img src="${phone.data.image}" class="w-75 h-75 ms-5 mt-5 rounded-start" alt="picture of a phone of ${phone.data.brand}">
         </div>
-        <div class="col-md-8 d-flex mt-5">
+        <div class="col-md-8 d-flex flex-lg-nowrap flex-wrap mt-5">
             <div class="card-body mx-4">
                 <p class="card-title">Brand: ${phone.data.brand}</p>
                 <p class="card-title">Phone name: ${phone.data.name}</p>
